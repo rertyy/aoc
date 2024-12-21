@@ -1,4 +1,9 @@
 defmodule Util do
+  def valid_coord?(coord, nrows, ncols) do
+    {i, j} = coord
+    i >= 0 and i < nrows and j >= 0 and j < ncols
+  end
+
   @spec pairwise_unique(list(any()), (any(), any() -> any())) :: list(any())
   def pairwise_unique(list, func \\ &{&1, &2}) do
     list
