@@ -28,4 +28,17 @@ defmodule AocUtil do
 
     {grid, nrows, ncols}
   end
+
+  def print_grid(grid, nrows, ncols) do
+    Enum.reduce((nrows - 1)..0//-1, [], fn i, racc ->
+      row =
+        Enum.reduce((ncols - 1)..0//-1, [], fn j, cacc ->
+          ele = grid[{i, j}]
+          [ele | cacc]
+        end)
+
+      [row | racc]
+    end)
+    |> IO.inspect()
+  end
 end
