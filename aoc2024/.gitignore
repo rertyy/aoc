@@ -1,6 +1,5 @@
-**/data/
+data
 .idea
-**/*.txt
 
 
 # The directory Mix will write compiled artifacts to.
@@ -30,4 +29,3 @@ aoc2024-*.tar
 # Temporary files, for example, from tests.
 /tmp/
 
-/out/
