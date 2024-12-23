@@ -29,7 +29,8 @@ defmodule AocUtil do
     {grid, nrows, ncols}
   end
 
-  def print_grid(grid, nrows, ncols) do
+  @spec inspect_grid(grid(), non_neg_integer(), non_neg_integer()) :: any()
+  def inspect_grid(grid, nrows, ncols) do
     Enum.reduce((nrows - 1)..0//-1, [], fn i, racc ->
       row =
         Enum.reduce((ncols - 1)..0//-1, [], fn j, cacc ->
@@ -40,5 +41,13 @@ defmodule AocUtil do
       [row | racc]
     end)
     |> IO.inspect()
+  end
+
+  @spec plot_on_grid(MapSet.t(), grid(), any()) :: any()
+  def plot_on_grid(visited, grid, ele \\ "O") do
+    visited
+    |> Enum.reduce(grid, fn coord, acc ->
+      %{acc | coord => ele}
+    end)
   end
 end
