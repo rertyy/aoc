@@ -109,6 +109,7 @@ defmodule Day16 do
       {min_dist, u, dir} = Heap.root(queue)
       queue = Heap.pop(queue)
 
+      # actually if u is the end, you can stop here
       dirs = get_new_dirs(dir)
 
       {dists, queue} =
