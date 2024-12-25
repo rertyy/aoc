@@ -43,6 +43,13 @@ defmodule AocUtil do
     |> IO.inspect()
   end
 
+  def plot_map_on_grid(map, grid) do
+    map
+    |> Enum.reduce(grid, fn {coord, ele}, acc ->
+      %{acc | coord => ele}
+    end)
+  end
+
   @spec plot_on_grid(MapSet.t(), grid(), any()) :: any()
   def plot_on_grid(visited, grid, ele \\ "O") do
     visited
