@@ -72,7 +72,7 @@ defmodule Day18 do
     end
   end
 
-  defp astar(grid, pq, dists, fin) do
+  def astar(grid, pq, dists, fin) do
     if Heap.empty?(pq) do
       dists
     else

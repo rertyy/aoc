@@ -1,4 +1,5 @@
 defmodule AocUtil do
+  @type dir() :: {integer(), integer()}
   @type coord() :: {i :: non_neg_integer(), j :: non_neg_integer()}
   @type grid() :: %{coord() => any()}
 
@@ -56,5 +57,36 @@ defmodule AocUtil do
     |> Enum.reduce(grid, fn coord, acc ->
       %{acc | coord => ele}
     end)
+  end
+
+  @spec find_coord(grid(), any()) :: coord()
+  def find_coord(grid, ele) do
+    Enum.find_value(grid, fn {coord, e} -> if e == ele, do: coord end)
+  end
+
+  @spec add(dir(), dir()) :: dir()
+  def add({i, j}, {di, dj}) do
+    {i + di, j + dj}
+  end
+
+  @spec manhattan(coord(), coord()) :: non_neg_integer()
+  def manhattan({i1, j1}, {i2, j2}) do
+    abs(i1 - i2) + abs(j1 - j2)
+  end
+
+  @spec generate_grid(non_neg_integer(), non_neg_integer()) :: grid()
+  def generate_grid(nrows, ncols, val \\ ".") do
+    # grid =
+    #   for(i <- 0..(nrows - 1), j <- 0..(ncols - 1), do: {{i, j}, @wall})
+    #   |> Enum.into(%{})
+
+    grid =
+      Enum.reduce(0..(nrows - 1), %{}, fn i, acc ->
+        Enum.reduce(0..(ncols - 1), acc, fn j, acc ->
+          Map.put(acc, {i, j}, val)
+        end)
+      end)
+
+    grid
   end
 end
