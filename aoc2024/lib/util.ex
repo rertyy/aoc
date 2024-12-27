@@ -22,4 +22,22 @@ defmodule Util do
     indexed = Enum.with_index(list)
     for {a, i} <- indexed, {b, j} <- indexed, i < j, do: func.(a, b)
   end
+
+  def cache(func) do
+    # note this won't work for recursive functions which call themselves
+
+    cache = %{}
+
+    fn arg ->
+      case Map.get(cache, arg) do
+        nil ->
+          result = func.(arg)
+          Map.put(cache, arg, result)
+          result
+
+        result ->
+          result
+      end
+    end
+  end
 end
